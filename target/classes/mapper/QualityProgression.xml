@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.dao.QualityProgressionMapper">
+  <resultMap id="BaseResultMap" type="com.crud.bean.A01M010_USER">
+    <id column="A01M002_ALLSECT_NM" jdbcType="VARCHAR" property="a01m002AllsectNm" />
+    <result column="A01M003_POSTCLS_NM" jdbcType="VARCHAR" property="a01m003PostclsNm" />
+    <result column="A010_FULL" jdbcType="VARCHAR" property="a010Full" />
+    <result column="TxtConferenceName" jdbcType="VARCHAR" property="txtConferenceName" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <resultMap id="BaseResultMap1" type="com.crud.bean.Project">
+    <id column="PROJECT_NO" jdbcType="INTEGER" property="projectNo" />
+    <result column="ORDER_NM" jdbcType="VARCHAR" property="orderNm" />
+    <result column="PRODUCT_SECT_NM" jdbcType="VARCHAR" property="productSectNm" />
+    <result column="PRODUCT_USER_FULLNAME" jdbcType="VARCHAR" property="productUserFullName" />
+    <result column="PROCESS_NAME" jdbcType="VARCHAR" property="processName" />
+  </resultMap>
+
+  <select id="a" parameterType="java.lang.String" resultMap="BaseResultMap"> 
+  	select * from a01m010_user where USER_NAME = #{userName,jdbcType=VARCHAR} ;
+  </select>
+  <select id="b" parameterType="java.lang.String" resultMap="BaseResultMap1">
+  	select * from project;
+  </select>
+  <select id="c" parameterType="java.lang.String" resultMap="BaseResultMap1">
+  	select * from project 
+  	where 1=1 and ORDER_NM = #{orderNm,jdbcType=VARCHAR}
+  		and PRODUCT_SECT_NM = #{productSectNm,jdbcType=VARCHAR} 
+  		and PRODUCT_USER_FULLNAME = #{productUserFullName,jdbcType=VARCHAR}
+  		and PROCESS_NAME =  #{processName,jdbcType=VARCHAR};
+  		
+  </select>
+</mapper>
